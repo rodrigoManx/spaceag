@@ -1,0 +1,38 @@
+version: "3.3"
+   
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  web:
+    build: .
+    command: gunicorn spaceag.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/code
+    environment:
+      - SECRET_KEY=devsecretkey
+      - DEBUG=1
+      - DB_HOST=DB
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_PASS=postgres
+      - AWS_STORAGE_BUCKET_NAME=r2012django1
+      - AWS_SECRET_ACCESS_KEY=A0Ck2Oe5c5ysQ8DVdU8AUixa4QYhT7RwRSCM8U60
+      - AWS_ACCESS_KEY_ID=AKIA5BH2EO6CNS4W7T3C
+      - AWS_S3_CUSTOM_DOMAIN=r2012django1.s3.us-west-2.amazonaws.com
+    depends_on:
+      - db
+  nginx:
+    build: ./nginx
+    ports:
+      - 1337:80
+    volumes:
+      - .:/code
+    depends_on:
+      - web
+
