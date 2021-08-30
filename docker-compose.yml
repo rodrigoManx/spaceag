@@ -22,8 +22,8 @@ services:
       - DB_USER=postgres
       - DB_PASS=postgres
       - AWS_STORAGE_BUCKET_NAME=r2012django1
-      - AWS_SECRET_ACCESS_KEY=A0Ck2Oe5c5ysQ8DVdU8AUixa4QYhT7RwRSCM8U60
-      - AWS_ACCESS_KEY_ID=AKIA5BH2EO6CNS4W7T3C
+      - AWS_SECRET_ACCESS_KEY=
+      - AWS_ACCESS_KEY_ID=
       - AWS_S3_CUSTOM_DOMAIN=r2012django1.s3.us-west-2.amazonaws.com
     depends_on:
       - db
